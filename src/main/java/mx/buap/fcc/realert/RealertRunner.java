@@ -1,27 +1,39 @@
-package mx.buap.fcc.realert.repository;
+package mx.buap.fcc.realert;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import mx.buap.fcc.realert.domain.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import mx.buap.fcc.realert.domain.Administrador;
+import mx.buap.fcc.realert.domain.Expediente;
+import mx.buap.fcc.realert.domain.Medico;
+import mx.buap.fcc.realert.domain.Paciente;
+import mx.buap.fcc.realert.repository.ExpedienteRepository;
+import mx.buap.fcc.realert.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.*;
-
-@SpringBootTest
-@RunWith(SpringRunner.class)
+/**
+ * @author Carlos Montoya
+ * @since 22/03/2019
+ */
+@Component
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Log4j2
-public class PersonaRepositoryTest
+public class RealertRunner implements CommandLineRunner
 {
-	@Autowired PersonaRepository personaRepository;
-	@Autowired ExpedienteRepository expedienteRepository;
+	private final PersonaRepository personaRepository;
+	private final ExpedienteRepository expedienteRepository;
 
-	@Test
+	@Override
 	@Transactional
-	public void db()
+	public void run(String... args) throws Exception
+	{
+		cargarDatosIniciales();
+	}
+
+	@Transactional
+	protected void cargarDatosIniciales()
 	{
 		Medico m = new Medico();
 		m.setNombre("Aureliano Buendia");
@@ -51,6 +63,6 @@ public class PersonaRepositoryTest
 		a.setTelefono("2222334466");
 		personaRepository.save(a);
 
-		personaRepository.findAll().forEach(log::info);
+		personaRepository.findAll().forEach(log::debug);
 	}
 }
