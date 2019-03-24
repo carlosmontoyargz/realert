@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * @author Carlos Montoya
@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @EqualsAndHashCode(callSuper = true)
 public class Paciente extends Persona
 {
-	@ManyToOne
+	@OneToOne
 	private Expediente expediente;
 
 	private String comentarios;

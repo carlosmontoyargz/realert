@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Log4j2
-public class RealertRunner implements CommandLineRunner
+public class CargadorDatosIniciales implements CommandLineRunner
 {
 	private final PersonaRepository personaRepository;
 	private final ExpedienteRepository expedienteRepository;
@@ -26,9 +26,10 @@ public class RealertRunner implements CommandLineRunner
 
 	@Override
 	@Transactional
-	public void run(String... args) throws Exception
+	public void run(String... args)
 	{
 		cargarDatosIniciales();
+		mostrarDatosIniciales();
 	}
 
 	@Transactional
@@ -69,12 +70,16 @@ public class RealertRunner implements CommandLineRunner
 		ps.setNombre("Tabletas 10 mg");
 		md.agregarPresentacion(ps);
 		medicamentoRepository.save(md);
+	}
 
+	@Transactional
+	protected void mostrarDatosIniciales()
+	{
 		personaRepository.findAll().forEach(log::debug);
-		medicamentoRepository.findAll().forEach(md1 ->
+		medicamentoRepository.findAll().forEach(medicamento ->
 		{
-			log.debug(md1);
-			md1.getPresentaciones().forEach(log::debug);
+			log.debug(medicamento);
+			medicamento.getPresentaciones().forEach(log::debug);
 		});
 	}
 }
