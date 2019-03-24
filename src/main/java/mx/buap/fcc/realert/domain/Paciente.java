@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -17,7 +18,7 @@ import javax.persistence.OneToOne;
 @EqualsAndHashCode(callSuper = true)
 public class Paciente extends Persona
 {
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Expediente expediente;
 
 	private String comentarios;

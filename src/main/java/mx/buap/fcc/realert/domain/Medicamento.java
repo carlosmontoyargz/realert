@@ -24,9 +24,9 @@ public class Medicamento
 
 	@OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
 	@ToString.Exclude
-	private List<Presentacion> presentaciones = new ArrayList<>();
+	private List<PresentacionMedicamento> presentaciones = new ArrayList<>();
 
-	public void agregarPresentacion(Presentacion p)
+	public void agregarPresentacion(PresentacionMedicamento p)
 	{
 		presentaciones.add(p);
 		p.setMedicamento(this);

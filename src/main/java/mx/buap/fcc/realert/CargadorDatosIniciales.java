@@ -3,13 +3,15 @@ package mx.buap.fcc.realert;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import mx.buap.fcc.realert.domain.*;
-import mx.buap.fcc.realert.repository.ExpedienteRepository;
 import mx.buap.fcc.realert.repository.MedicamentoRepository;
 import mx.buap.fcc.realert.repository.PersonaRepository;
+import mx.buap.fcc.realert.repository.RecetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 /**
  * @author Carlos Montoya
@@ -21,8 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CargadorDatosIniciales implements CommandLineRunner
 {
 	private final PersonaRepository personaRepository;
-	private final ExpedienteRepository expedienteRepository;
 	private final MedicamentoRepository medicamentoRepository;
+	private final RecetaRepository recetaRepository;
 
 	@Override
 	@Transactional
@@ -52,7 +54,6 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		p.setTelefono("2222334466");
 		e.setContenido("Primera visita: Todos los indicadores parecen estar en orden");
 		p.setExpediente(e);
-		expedienteRepository.save(e);
 		personaRepository.save(p);
 
 		Administrador a = new Administrador();
@@ -64,22 +65,43 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		personaRepository.save(a);
 
 		Medicamento md = new Medicamento();
-		Presentacion ps = new Presentacion();
+		PresentacionMedicamento ps = new PresentacionMedicamento();
 		md.setNombre("Buscapina");
 		md.setFormula("Butilescopolamina, Metamizol");
 		ps.setNombre("Tabletas 10 mg");
 		md.agregarPresentacion(ps);
 		medicamentoRepository.save(md);
+
+		Receta r = new Receta();
+		DetalleReceta dr = new DetalleReceta();
+		r.setFecha(LocalDate.now());
+		r.setMedico(m);
+		r.setPaciente(p);
+		dr.setPresentacion(ps);
+		dr.setDosis("Una tableta cada 8 horas");
+
+		r.agregarDetalle(dr);
+		recetaRepository.save(r);
 	}
 
 	@Transactional
 	protected void mostrarDatosIniciales()
 	{
+		log.debug("Personas:");
 		personaRepository.findAll().forEach(log::debug);
+
+		log.debug("Medicamentos:");
 		medicamentoRepository.findAll().forEach(medicamento ->
 		{
 			log.debug(medicamento);
 			medicamento.getPresentaciones().forEach(log::debug);
+		});
+
+		log.debug("Recetas:");
+		recetaRepository.findAll().forEach(receta ->
+		{
+			log.debug(receta);
+			receta.getDetalles().forEach(log::debug);
 		});
 	}
 }

@@ -1,6 +1,7 @@
 package mx.buap.fcc.realert.domain;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -17,10 +18,11 @@ public class DetalleReceta
 	private int id;
 
 	@ManyToOne
+	@ToString.Exclude
 	private Receta receta;
 
 	@ManyToOne
-	private Medicamento medicamento;
+	private PresentacionMedicamento presentacion;
 
 	private String dosis;
 }

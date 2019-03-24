@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-public class Presentacion
+public class PresentacionMedicamento
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
