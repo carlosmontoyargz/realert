@@ -56,4 +56,10 @@ public class IndexController
 	{
 		return "user-profile-lite";
 	}
+
+	@GetMapping("/login")
+	public String login()
+	{
+		return "login";
+	}
 }

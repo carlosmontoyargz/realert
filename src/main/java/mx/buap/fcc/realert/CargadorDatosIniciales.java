@@ -6,9 +6,9 @@ import mx.buap.fcc.realert.domain.*;
 import mx.buap.fcc.realert.repository.MedicamentoRepository;
 import mx.buap.fcc.realert.repository.PersonaRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
-import mx.buap.fcc.realert.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +26,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 	private final PersonaRepository personaRepository;
 	private final MedicamentoRepository medicamentoRepository;
 	private final RecetaRepository recetaRepository;
-	private final RolRepository rolRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional
@@ -46,7 +46,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		medico.setNombre("Aureliano Buendia");
 		medico.setCedula("10008000");
 		medico.setCorreo("aureliano.buendia@hotmail.com");
-		medico.setPassword("sipirili");
+		medico.setPassword(passwordEncoder.encode("sipirili"));
 		medico.setTelefono("2222334466");
 		rol.setAuthority("medico");
 		medico.setRol(rol);
@@ -58,7 +58,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		paciente.setNombre("Usula Iguaran");
 		paciente.setComentarios("Ha gozado de longevidad");
 		paciente.setCorreo("ursula.iguaran@gmail.com");
-		paciente.setPassword("noporolo");
+		paciente.setPassword(passwordEncoder.encode("noporolo"));
 		paciente.setTelefono("3344333436");
 		e.setContenido("Primera visita: Todos los indicadores parecen estar en orden");
 		paciente.setExpediente(e);
@@ -71,7 +71,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		administrador.setNombre("Jose Arcadio");
 		administrador.setCorreo("jose.arcadio@outlook.com");
 		administrador.setClave("CLAVE");
-		administrador.setPassword("trololo");
+		administrador.setPassword(passwordEncoder.encode("trololo"));
 		administrador.setTelefono("9988334116");
 		rol.setAuthority("admin");
 		administrador.setRol(rol);
