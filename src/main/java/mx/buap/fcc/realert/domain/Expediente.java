@@ -16,7 +16,8 @@ import javax.persistence.Id;
 public class Expediente
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
 	private String contenido;
 }

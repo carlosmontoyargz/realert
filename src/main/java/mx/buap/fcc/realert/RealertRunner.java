@@ -2,11 +2,9 @@ package mx.buap.fcc.realert;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import mx.buap.fcc.realert.domain.Administrador;
-import mx.buap.fcc.realert.domain.Expediente;
-import mx.buap.fcc.realert.domain.Medico;
-import mx.buap.fcc.realert.domain.Paciente;
+import mx.buap.fcc.realert.domain.*;
 import mx.buap.fcc.realert.repository.ExpedienteRepository;
+import mx.buap.fcc.realert.repository.MedicamentoRepository;
 import mx.buap.fcc.realert.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,6 +22,7 @@ public class RealertRunner implements CommandLineRunner
 {
 	private final PersonaRepository personaRepository;
 	private final ExpedienteRepository expedienteRepository;
+	private final MedicamentoRepository medicamentoRepository;
 
 	@Override
 	@Transactional
@@ -63,6 +62,19 @@ public class RealertRunner implements CommandLineRunner
 		a.setTelefono("2222334466");
 		personaRepository.save(a);
 
+		Medicamento md = new Medicamento();
+		Presentacion ps = new Presentacion();
+		md.setNombre("Buscapina");
+		md.setFormula("Butilescopolamina, Metamizol");
+		ps.setNombre("Tabletas 10 mg");
+		md.agregarPresentacion(ps);
+		medicamentoRepository.save(md);
+
 		personaRepository.findAll().forEach(log::debug);
+		medicamentoRepository.findAll().forEach(md1 ->
+		{
+			log.debug(md1);
+			md1.getPresentaciones().forEach(log::debug);
+		});
 	}
 }
