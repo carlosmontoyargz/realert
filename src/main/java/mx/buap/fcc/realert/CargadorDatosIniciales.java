@@ -6,6 +6,7 @@ import mx.buap.fcc.realert.domain.*;
 import mx.buap.fcc.realert.repository.MedicamentoRepository;
 import mx.buap.fcc.realert.repository.PersonaRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
+import mx.buap.fcc.realert.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 	private final PersonaRepository personaRepository;
 	private final MedicamentoRepository medicamentoRepository;
 	private final RecetaRepository recetaRepository;
+	private final RolRepository rolRepository;
 
 	@Override
 	@Transactional
@@ -37,46 +39,58 @@ public class CargadorDatosIniciales implements CommandLineRunner
 	@Transactional
 	protected void cargarDatosIniciales()
 	{
-		Medico m = new Medico();
-		m.setNombre("Aureliano Buendia");
-		m.setCedula("10008000");
-		m.setCorreo("aureliano.buendia@hotmail.com");
-		m.setPassword("sipirili");
-		m.setTelefono("2222334466");
-		personaRepository.save(m);
+		Rol rol;
 
-		Paciente p = new Paciente();
+		Medico medico = new Medico();
+		rol = new Rol();
+		medico.setNombre("Aureliano Buendia");
+		medico.setCedula("10008000");
+		medico.setCorreo("aureliano.buendia@hotmail.com");
+		medico.setPassword("sipirili");
+		medico.setTelefono("2222334466");
+		rol.setAuthority("medico");
+		medico.setRol(rol);
+		personaRepository.save(medico);
+
+		Paciente paciente = new Paciente();
 		Expediente e = new Expediente();
-		p.setNombre("Usula Iguaran");
-		p.setComentarios("Ha gozado de longevidad");
-		p.setCorreo("ursula.iguaran@gmail.com");
-		p.setPassword("sipirili");
-		p.setTelefono("2222334466");
+		rol = new Rol();
+		paciente.setNombre("Usula Iguaran");
+		paciente.setComentarios("Ha gozado de longevidad");
+		paciente.setCorreo("ursula.iguaran@gmail.com");
+		paciente.setPassword("noporolo");
+		paciente.setTelefono("3344333436");
 		e.setContenido("Primera visita: Todos los indicadores parecen estar en orden");
-		p.setExpediente(e);
-		personaRepository.save(p);
+		paciente.setExpediente(e);
+		rol.setAuthority("paciente");
+		paciente.setRol(rol);
+		personaRepository.save(paciente);
 
-		Administrador a = new Administrador();
-		a.setNombre("Jose Arcadio");
-		a.setCorreo("jose.arcadio@outlook.com");
-		a.setClave("CLAVE");
-		a.setPassword("sipirili");
-		a.setTelefono("2222334466");
-		personaRepository.save(a);
+		Administrador administrador = new Administrador();
+		rol = new Rol();
+		administrador.setNombre("Jose Arcadio");
+		administrador.setCorreo("jose.arcadio@outlook.com");
+		administrador.setClave("CLAVE");
+		administrador.setPassword("trololo");
+		administrador.setTelefono("9988334116");
+		rol.setAuthority("admin");
+		administrador.setRol(rol);
+		personaRepository.save(administrador);
 
 		Medicamento md = new Medicamento();
 		PresentacionMedicamento ps = new PresentacionMedicamento();
 		md.setNombre("Buscapina");
 		md.setFormula("Butilescopolamina, Metamizol");
-		ps.setNombre("Tabletas 10 mg");
+		ps.setNombre("Tabletas");
+		ps.setCantidad("10 mg");
 		md.agregarPresentacion(ps);
 		medicamentoRepository.save(md);
 
 		Receta r = new Receta();
 		DetalleReceta dr = new DetalleReceta();
 		r.setFecha(LocalDate.now());
-		r.setMedico(m);
-		r.setPaciente(p);
+		r.setMedico(medico);
+		r.setPaciente(paciente);
 		dr.setPresentacion(ps);
 		dr.setDosis("Una tableta cada 8 horas");
 

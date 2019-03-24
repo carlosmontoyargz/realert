@@ -20,4 +20,7 @@ public abstract class Persona
 	private String correo;
 	private String password;
 	private String telefono;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Rol rol;
 }
