@@ -39,10 +39,8 @@ public class CargadorDatosIniciales implements CommandLineRunner
 	@Transactional
 	protected void cargarDatosIniciales()
 	{
-		Rol rol;
-
 		Medico medico = new Medico();
-		rol = new Rol();
+		Rol rol = new Rol();
 		medico.setNombre("Aureliano Buendia");
 		medico.setCedula("10008000");
 		medico.setCorreo("aureliano.buendia@hotmail.com");
@@ -51,6 +49,17 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		rol.setAuthority("medico");
 		medico.setRol(rol);
 		personaRepository.save(medico);
+
+		Medico medico2 = new Medico();
+		Rol rol2 = new Rol();
+		medico2.setNombre("Pedro Alfaro");
+		medico2.setCedula("80001000");
+		medico2.setCorreo("pedro.alfaro@hotmail.com");
+		medico2.setPassword(passwordEncoder.encode("xdxdxd"));
+		medico2.setTelefono("1010202040");
+		rol2.setAuthority("medico");
+		medico.setRol(rol2);
+		personaRepository.save(medico2);
 
 		Paciente paciente = new Paciente();
 		Expediente e = new Expediente();
@@ -93,7 +102,16 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		r.setPaciente(paciente);
 		dr.setPresentacion(ps);
 		dr.setDosis("Una tableta cada 8 horas");
+		r.agregarDetalle(dr);
+		recetaRepository.save(r);
 
+		r = new Receta();
+		dr = new DetalleReceta();
+		r.setFecha(LocalDate.now());
+		r.setMedico(medico2);
+		r.setPaciente(paciente);
+		dr.setPresentacion(ps);
+		dr.setDosis("Una tableta cada 10 horas");
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
 	}
