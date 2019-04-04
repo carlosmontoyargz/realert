@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="UTF-8">
+   <title>Realert navigation fragments</title>
+</head>
+<body>
+   <!-- info popup -->
+   <div th:fragment="info-popup">
+      <div class="promo-popup animated">
+         <!--
+         <a href="https://www.buap.mx" class="pp-cta extra-action">
+            <img src="https://pbs.twimg.com/profile_images/642027333960859648/jiMLBRwP_400x400.png">
+         </a>
+         -->
+         <div class="pp-intro-bar">
+            Información
+            <span class="close">
+               <i class="material-icons">close</i>
+            </span>
+            <span class="up">
+               <i class="material-icons">keyboard_arrow_up</i>
+            </span>
+         </div>
+         <div class="pp-inner-content">
+            <h2>ReAlert</h2>
+            <p>Sistema de alertas medicas desarollado por alumnos de la FCC para la clase de Ingenieria de Software.</p>
+            <a class="pp-cta extra-action" href="https://github.com/carlosmontoyargz/realert">GitHub</a>
+         </div>
+      </div>
+   </div>
+</body>
+</html>

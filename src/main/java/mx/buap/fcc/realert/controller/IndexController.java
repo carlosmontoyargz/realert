@@ -21,45 +21,21 @@ public class IndexController
 		return "index";
 	}
 
-	@GetMapping("/add-new-post.html")
-	public String newPost()
+	@GetMapping("/lista-recetas")
+	public String listaRecetas()
 	{
-		return "add-new-post";
-	}
-
-	@GetMapping("/components-blog-posts.html")
-	public String blogPosts()
-	{
-		return "components-blog-posts";
-	}
-
-	@GetMapping("/errors.html")
-	public String errors()
-	{
-		return "errors";
-	}
-
-	@GetMapping("/form-components.html")
-	public String forms()
-	{
-		return "form-components";
-	}
-
-	@GetMapping("/tables.html")
-	public String tables()
-	{
-		return "tables";
-	}
-
-	@GetMapping("/user-profile-lite.html")
-	public String userProfile()
-	{
-		return "user-profile-lite";
+		return "lista-recetas";
 	}
 
 	@GetMapping("/login")
 	public String login()
 	{
 		return "login";
+	}
+
+	@GetMapping("/template-base")
+	public String templateBase()
+	{
+		return "template-base.html";
 	}
 }

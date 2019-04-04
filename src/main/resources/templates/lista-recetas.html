@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header::header">
+   <title id="pageTitle">Mis recetas</title>
+</head>
+<body class="h-100">
+
+   <!-- Scripts -->
+   <div th:replace="fragments/scripts::scripts"></div>
+
+   <!-- Color switcher -->
+   <div th:replace="fragments/color-switcher::color-switcher"></div>
+
+   <div class="container-fluid">
+      <div class="row">
+
+         <!-- Sidebar -->
+         <div th:replace="fragments/side-bar::side-bar(usuario = 'Gretel Santiago')"></div>
+
+         <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+
+            <!-- Top navbar -->
+            <div th:replace="fragments/nav-bar::nav-bar(usuario = 'Gretel Santiago')"></div>
+
+            <!-- Content -->
+            <div class="main-content-container container-fluid px-4">
+
+               <!-- Content Header -->
+               <div class="page-header row no-gutters py-4">
+                  <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                     <span class="text-uppercase page-subtitle">Resumen</span>
+                     <h3 class="page-title">Mis recetas</h3>
+                  </div>
+               </div>
+
+               <!-- Lista de recetas -->
+               <div class="row">
+                  <div class="col">
+                     <div class="card card-small mb-4">
+                        <div class="card-header border-bottom">
+                           <h6 class="m-0">Lista de recetas</h6>
+                        </div>
+                        <div class="card-body p-0 pb-3 text-center">
+                           <table class="table mb-0">
+                              <thead class="bg-light">
+                              <tr>
+                                 <th scope="col" class="border-0">#</th>
+                                 <th scope="col" class="border-0">Fecha</th>
+                                 <th scope="col" class="border-0">Medico</th>
+                                 <th scope="col" class="border-0"></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td>1</td>
+                                    <td>15/06/2018</td>
+                                    <td>Diego Rodriguez</td>
+                                    <td><a href="#">Ver detalles</a></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- End of Content -->
+
+            <!-- Footer -->
+            <div th:replace="fragments/footer::footer"></div>
+         </main>
+      </div>
+   </div>
+
+   <!-- Info pop-up -->
+   <div th:replace="fragments/info-popup::info-popup"></div>
+</body>
+</html>
