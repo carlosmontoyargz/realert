@@ -1,6 +1,7 @@
 package mx.buap.fcc.realert.config;
 
 import lombok.RequiredArgsConstructor;
+import mx.buap.fcc.realert.domain.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,11 +45,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 		http
 				.authorizeRequests()
 						.antMatchers("/css/**", "/fonts/**", "/css/**", "/images/**", "/js/**", "/scripts/**", "/styles/**", "/vendor/**")
-							.permitAll()
-						.anyRequest().authenticated()
-//						.antMatchers("/", "/console/**").permitAll()
+								.permitAll()
+						.antMatchers("/recetas/lista-recetas-paciente")
+								.hasAnyAuthority(Rol.PACIENTE.toString())
 						.antMatchers("/add-new-post")
-							.hasAnyAuthority("admin")
+								.hasAnyAuthority(Rol.ADMINISTRADOR.toString())
+						.anyRequest()
+								.authenticated()
 				.and()
 				.formLogin()
 						.loginPage("/login")

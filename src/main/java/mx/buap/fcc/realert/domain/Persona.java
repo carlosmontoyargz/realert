@@ -21,6 +21,7 @@ public abstract class Persona
 	private String password;
 	private String telefono;
 
+	@Enumerated(EnumType.STRING)
 	@Column(updatable = false)
 	private Rol rol;
 
