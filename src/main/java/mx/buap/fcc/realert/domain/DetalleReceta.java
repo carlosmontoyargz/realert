@@ -25,5 +25,7 @@ public class DetalleReceta
 	private PresentacionMedicamento presentacion;
 
 	private int dosis;
+	private int intervaloHoras;
+	private int duracionDias;
 	private String mensaje;
 }

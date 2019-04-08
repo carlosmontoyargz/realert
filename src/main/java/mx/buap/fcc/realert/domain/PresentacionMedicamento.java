@@ -20,5 +20,6 @@ public class PresentacionMedicamento
 	private Medicamento medicamento;
 
 	private String nombre;
+	private String viaAdministracion;
 	private String cantidad;
 }

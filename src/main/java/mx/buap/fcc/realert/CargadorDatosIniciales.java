@@ -80,6 +80,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		md.setFormula("Butilescopolamina, Metamizol");
 		ps.setNombre("Tabletas");
 		ps.setCantidad("10 mg");
+		ps.setViaAdministracion("Oral");
 		md.agregarPresentacion(ps);
 		medicamentoRepository.save(md);
 
@@ -89,7 +90,9 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		r.setMedico(medico);
 		r.setPaciente(paciente);
 		dr.setPresentacion(ps);
-		dr.setDosis(8);
+		dr.setDosis(2);
+		dr.setIntervaloHoras(8);
+		dr.setDuracionDias(10);
 		dr.setMensaje("Una tableta cada 8 horas");
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
@@ -100,7 +103,9 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		r.setMedico(medico2);
 		r.setPaciente(paciente);
 		dr.setPresentacion(ps);
-		dr.setDosis(10);
+		dr.setDosis(3);
+		dr.setIntervaloHoras(10);
+		dr.setDuracionDias(5);
 		dr.setMensaje("Una tableta cada 10 horas");
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
