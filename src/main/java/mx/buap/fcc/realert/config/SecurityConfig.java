@@ -43,15 +43,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	{
 		http
 				.authorizeRequests()
-						.antMatchers("/", "/console/**").permitAll()
-						.antMatchers("/add-new-post").hasAnyAuthority("admin")
+						.antMatchers("/css/**", "/fonts/**", "/css/**", "/images/**", "/js/**", "/scripts/**", "/styles/**", "/vendor/**")
+							.permitAll()
+						.anyRequest().authenticated()
+//						.antMatchers("/", "/console/**").permitAll()
+						.antMatchers("/add-new-post")
+							.hasAnyAuthority("admin")
 				.and()
 				.formLogin()
 						.loginPage("/login")
-						.defaultSuccessUrl("/").permitAll()
+						.defaultSuccessUrl("/")
+						.permitAll()
 				.and()
 				.logout()
-						.logoutSuccessUrl("/")
+						.logoutSuccessUrl("/login?logout")
+
+				// Para que la consola h2 funcione
 				.and()
 				.headers()
 						.frameOptions().disable()

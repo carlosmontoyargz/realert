@@ -24,5 +24,6 @@ public class DetalleReceta
 	@ManyToOne
 	private PresentacionMedicamento presentacion;
 
-	private String dosis;
+	private int dosis;
+	private String mensaje;
 }

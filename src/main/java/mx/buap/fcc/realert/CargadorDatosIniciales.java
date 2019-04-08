@@ -101,7 +101,8 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		r.setMedico(medico);
 		r.setPaciente(paciente);
 		dr.setPresentacion(ps);
-		dr.setDosis("Una tableta cada 8 horas");
+		dr.setDosis(8);
+		dr.setMensaje("Una tableta cada 8 horas");
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
 
@@ -111,7 +112,8 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		r.setMedico(medico2);
 		r.setPaciente(paciente);
 		dr.setPresentacion(ps);
-		dr.setDosis("Una tableta cada 10 horas");
+		dr.setDosis(10);
+		dr.setMensaje("Una tableta cada 10 horas");
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
 	}
