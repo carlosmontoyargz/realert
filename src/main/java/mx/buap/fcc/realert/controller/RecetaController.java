@@ -24,7 +24,9 @@ public class RecetaController
 	@GetMapping("/lista-recetas-paciente")
 	public String listaRecetasPaciente(Model model, Principal principal)
 	{
-		model.addAttribute("recetas", repository.findAll());
+		model.addAttribute("recetas",
+				repository
+						.findByPacienteCorreo(principal.getName()));
 		return "lista-recetas-paciente";
 	}
 }

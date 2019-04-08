@@ -21,6 +21,9 @@ public abstract class Persona
 	private String password;
 	private String telefono;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@Column(updatable = false)
 	private Rol rol;
+
+	/*@ManyToOne(cascade = CascadeType.ALL)
+	private Rol rol;*/
 }

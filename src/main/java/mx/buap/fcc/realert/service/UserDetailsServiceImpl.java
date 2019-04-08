@@ -38,6 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService
 
 		return new User(persona.getCorreo(), persona.getPassword(), true,
 				true, true, true,
-				Collections.singleton(new SimpleGrantedAuthority(persona.getRol().getAuthority())));
+				Collections.singleton(new SimpleGrantedAuthority(persona.getRol().toString())));
 	}
 }

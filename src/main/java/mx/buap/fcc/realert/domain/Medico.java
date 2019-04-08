@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 
 /**
  * @author Carlos Montoya
@@ -17,4 +18,10 @@ import javax.persistence.Entity;
 public class Medico extends Persona
 {
 	private String cedula;
+
+	@PrePersist
+	public void setRol()
+	{
+		super.setRol(Rol.MEDICO);
+	}
 }

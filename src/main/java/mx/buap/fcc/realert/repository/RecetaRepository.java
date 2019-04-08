@@ -4,6 +4,8 @@ import mx.buap.fcc.realert.domain.Receta;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Carlos Montoya
  * @since 23/03/2019
@@ -11,4 +13,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecetaRepository extends CrudRepository<Receta, Integer>
 {
+	List<Receta> findByPacienteCorreo(String correo);
 }

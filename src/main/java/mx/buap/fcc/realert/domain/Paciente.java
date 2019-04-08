@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 
 /**
  * @author Carlos Montoya
@@ -22,4 +23,10 @@ public class Paciente extends Persona
 	private Expediente expediente;
 
 	private String comentarios;
+
+	@PrePersist
+	public void setRol()
+	{
+		super.setRol(Rol.PACIENTE);
+	}
 }
