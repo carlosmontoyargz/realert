@@ -34,12 +34,12 @@
 
                      <div class="input-group-append">
                         <h5 class="page-title">Fecha</h5>
-                        <span th:text="${receta.fecha}" class="input-group-text">15/06/2018</span>
+                        <span th:text="${receta.fecha}" class="input-group-text">00/00/0000</span>
                      </div>
 
                      <div class="input-group-append">
                         <h5 class="page-title">Médico</h5>
-                        <span th:text="${receta.medico.nombre}" class="input-group-text">Daniel Martinez</span>
+                        <span th:text="${receta.medico.nombre}" class="input-group-text">Egeehr Leewfrt</span>
                      </div>
                   </div>
                </div>
@@ -67,11 +67,11 @@
                               <tbody>
                               <tr th:each="detalle: ${receta.detalles}">
                                  <td th:text="${detalle.id}">1</td>
-                                 <td th:text="${detalle.presentacion.medicamento.nombre}">Tempra 500MG</td>
-                                 <td th:text="|${detalle.dosis} ${detalle.presentacion.nombre}|">1 tableta</td>
-                                 <td th:text="${detalle.presentacion.viaAdministracion}">Oral</td>
-                                 <td th:text="|${detalle.intervaloHoras} horas|">8 horas</td>
-                                 <td th:text="|${detalle.duracionDias} días|">3 días</td>
+                                 <td th:text="${detalle.presentacion.medicamento.nombre}">Lferergef 000MG</td>
+                                 <td th:text="|${detalle.dosis} ${detalle.presentacion.nombre}|">0 segetgetr</td>
+                                 <td th:text="${detalle.presentacion.viaAdministracion}">Pfwefwe</td>
+                                 <td th:text="|${detalle.intervaloHoras} horas|">0 horas</td>
+                                 <td th:text="|${detalle.duracionDias} días|">0 días</td>
                                  <td><span onclick="modificarReceta()"><i class="material-icons" >edit</i></span></td>
                               </tr>
                               </tbody>

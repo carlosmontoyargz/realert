@@ -24,16 +24,16 @@ public class RecetaController
 {
 	private final RecetaRepository repository;
 
-	@GetMapping("/lista-recetas-paciente")
+	@GetMapping("/lista-recetas")
 	public String listaRecetasPaciente(Model model, Principal principal)
 	{
 		model.addAttribute("recetas",
 				repository
 						.findByPacienteCorreo(principal.getName()));
-		return "lista-recetas-paciente";
+		return "lista-recetas";
 	}
 
-	@GetMapping("/lista-recetas-paciente/receta")
+	@GetMapping("/lista-recetas/receta")
 	public String mostrarReceta(@RequestParam(value = "id") int id, Model model)
 	{
 		model.addAttribute("receta",
