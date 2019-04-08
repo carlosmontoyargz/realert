@@ -1,7 +1,6 @@
 package mx.buap.fcc.realert.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import mx.buap.fcc.realert.domain.Persona;
 import mx.buap.fcc.realert.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-
 /**
+ * Implementacion de servicio para obtener al usuario desde la base de datos.
+ *
  * @author Carlos Montoya
  * @since 24/03/2019
  */
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-@Log4j2
 public class UserDetailsServiceImpl implements UserDetailsService
 {
 	private final PersonaRepository personaRepository;
@@ -33,11 +31,10 @@ public class UserDetailsServiceImpl implements UserDetailsService
 		Persona persona = personaRepository
 				.findByCorreo(s)
 				.orElseThrow(() -> new UsernameNotFoundException(s));
-
-		log.trace("Usuario encontrado: {}", persona);
-
-		return new User(persona.getCorreo(), persona.getPassword(), true,
-				true, true, true,
-				Collections.singleton(new SimpleGrantedAuthority(persona.getRol().toString())));
+		return User
+				.withUsername(persona.getCorreo())
+				.password(persona.getPassword())
+				.authorities(new SimpleGrantedAuthority(persona.getRol().toString()))
+				.build();
 	}
 }

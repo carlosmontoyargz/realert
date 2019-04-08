@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 						.permitAll()
 				.and()
 				.logout()
-						.logoutSuccessUrl("/login?logout")
+						.logoutSuccessUrl("/login")
 
 				// Para que la consola h2 funcione
 				.and()
