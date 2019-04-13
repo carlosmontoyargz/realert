@@ -2,14 +2,16 @@ package mx.buap.fcc.realert.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import mx.buap.fcc.realert.domain.DetalleReceta;
+import mx.buap.fcc.realert.domain.Receta;
+import mx.buap.fcc.realert.repository.DetalleRecetaRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 /**
@@ -23,8 +25,9 @@ import java.security.Principal;
 public class RecetaController
 {
 	private final RecetaRepository repository;
+	private final DetalleRecetaRepository detalleRepository;
 
-	@GetMapping("/lista-recetas")
+	@GetMapping({"", "/"})
 	public String listaRecetasPaciente(Model model, Principal principal)
 	{
 		model.addAttribute("recetas",
@@ -33,13 +36,50 @@ public class RecetaController
 		return "lista-recetas";
 	}
 
-	@GetMapping("/lista-recetas/receta")
-	public String mostrarReceta(@RequestParam(value = "id") int id, Model model)
+	@GetMapping("/ver-receta")
+	public String verReceta(Model model, @RequestParam("id") int id)
 	{
 		model.addAttribute("receta",
 				repository
 						.findById(id)
 						.orElseThrow(NullPointerException::new));
-		return "vista-receta";
+		return "ver-receta";
+	}
+
+	@GetMapping("agregar-detalle")
+	public String agregarDetalle(Model model, @RequestParam("id") int id)
+	{
+		Receta rc = new Receta();
+		DetalleReceta dr = new DetalleReceta();
+		rc.setId(id);
+		dr.setReceta(rc);
+
+		model.addAttribute("detalleReceta", dr);
+		return "modificar-detalle-receta";
+	}
+
+	@GetMapping("/modificar-detalle")
+	public String modificarDetalleReceta(Model model, @RequestParam("id") int id)
+	{
+		model.addAttribute("detalleReceta",
+				detalleRepository
+						.findById(id)
+						.orElseThrow(NullPointerException::new));
+		return "modificar-detalle-receta";
+	}
+
+	@PostMapping("/modificar-detalle")
+	public String guardarDetalle(@ModelAttribute DetalleReceta detalleReceta)
+	{
+		log.trace(detalleReceta);
+		detalleRepository.save(detalleReceta);
+		return "redirect:ver-receta?id=" + detalleReceta.getReceta().getId();
+	}
+
+	@GetMapping("/eliminar-detalle")
+	public String eliminarDetalle(@RequestParam("id") int id, HttpServletRequest request)
+	{
+		detalleRepository.deleteById(id);
+		return "redirect:" + request.getHeader("Referer");
 	}
 }

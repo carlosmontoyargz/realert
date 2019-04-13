@@ -75,25 +75,38 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		personaRepository.save(administrador);
 
 		Medicamento md = new Medicamento();
-		PresentacionMedicamento ps = new PresentacionMedicamento();
 		md.setNombre("Buscapina");
 		md.setFormula("Butilescopolamina, Metamizol");
-		ps.setNombre("Tabletas");
-		ps.setCantidad("10 mg");
-		ps.setViaAdministracion("Oral");
-		md.agregarPresentacion(ps);
+		md.setPresentacion("Tabletas");
+		md.setViaAdministracion("Oral");
 		medicamentoRepository.save(md);
 
+		Medicamento md2 = new Medicamento();
+		md2.setNombre("Aspirina");
+		md2.setFormula("Acido acetilsalacilico");
+		md2.setPresentacion("Tabletas");
+		md2.setViaAdministracion("Oral");
+		medicamentoRepository.save(md2);
+
 		Receta r = new Receta();
-		DetalleReceta dr = new DetalleReceta();
 		r.setFecha(LocalDate.now());
 		r.setMedico(medico);
 		r.setPaciente(paciente);
-		dr.setPresentacion(ps);
+
+		DetalleReceta dr = new DetalleReceta();
+		dr.setMedicamento(md);
 		dr.setDosis(2);
-		dr.setIntervaloHoras(8);
+		dr.setFrecuenciaHoras(8);
 		dr.setDuracionDias(10);
 		dr.setMensaje("Una tableta cada 8 horas");
+		r.agregarDetalle(dr);
+
+		dr = new DetalleReceta();
+		dr.setMedicamento(md2);
+		dr.setDosis(4);
+		dr.setFrecuenciaHoras(3);
+		dr.setDuracionDias(5);
+		dr.setMensaje("Una tableta cada 3 horas");
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
 
@@ -102,9 +115,9 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		r.setFecha(LocalDate.now());
 		r.setMedico(medico2);
 		r.setPaciente(paciente);
-		dr.setPresentacion(ps);
+		dr.setMedicamento(md);
 		dr.setDosis(3);
-		dr.setIntervaloHoras(10);
+		dr.setFrecuenciaHoras(10);
 		dr.setDuracionDias(5);
 		dr.setMensaje("Una tableta cada 10 horas");
 		r.agregarDetalle(dr);
@@ -118,11 +131,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		personaRepository.findAll().forEach(log::debug);
 
 		log.debug("Medicamentos:");
-		medicamentoRepository.findAll().forEach(medicamento ->
-		{
-			log.debug(medicamento);
-			medicamento.getPresentaciones().forEach(log::debug);
-		});
+		medicamentoRepository.findAll().forEach(log::debug);
 
 		log.debug("Recetas:");
 		recetaRepository.findAll().forEach(receta ->

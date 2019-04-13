@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/header::header">
+    <title id="pageTitle">Mis recetas</title>
+</head>
+<body class="h-100">
+
+<!-- Scripts -->
+<div th:replace="fragments/scripts::scripts"></div>
+
+<!-- Color switcher -->
+<div th:replace="fragments/color-switcher::color-switcher"></div>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div th:replace="fragments/side-bar::side-bar(usuario = 'Gretel Santiago')"></div>
+
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+
+            <!-- Navbar -->
+            <div th:replace="fragments/nav-bar::nav-bar"></div>
+
+            <!-- Content -->
+            <div class="main-content-container container-fluid px-4">
+
+                <!-- Content Header -->
+                <div class="page-header row no-gutters py-4">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <span class="text-uppercase page-subtitle"></span>
+                        <h3 class="page-title">Modificar detalle de receta</h3>
+                    </div>
+                </div>
+
+                <!-- Default Light Table -->
+                <!-- inicia modifica datos de receta -->
+                <div class="col-lg-8">
+                    <div class="card card-small mb-4">
+                        <div class="card-header border-bottom">
+                            <h6 class="m-0">Detalle de receta</h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item p-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <form action="#"
+                                              th:action="@{/recetas/modificar-detalle}" th:object="${detalleReceta}" method="post">
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="id-receta">ID Receta</label>
+                                                    <input type="text" class="form-control" id="id-receta" placeholder="ID Receta"
+                                                           th:field="*{receta.id}" readonly>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="id-detalle">ID Detalle</label>
+                                                    <input type="text" class="form-control" id="id-detalle" placeholder="ID Detalle"
+                                                           th:field="*{id}" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="medicamento">Medicamento</label>
+                                                    <input type="text" class="form-control" id="medicamento" placeholder="Medicamento"
+                                                           th:field="*{medicamento.nombre}" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="presentacion">Presentacion</label>
+                                                    <input type="text" class="form-control" id="presentacion" placeholder="Presentacion"
+                                                           th:field="*{medicamento.presentacion}" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="dosis">Dosis</label>
+                                                    <input type="text" class="form-control" id="dosis" placeholder="Dosis"
+                                                           th:field="*{dosis}">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="via-administracion">Vía de administración</label>
+                                                    <input type="text" class="form-control" id="via-administracion"  placeholder="Via de administracion"
+                                                           th:field="*{medicamento.viaAdministracion}" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="frecuencia">Frecuencia en horas</label>
+                                                    <input type="text" class="form-control" id="frecuencia" placeholder="Horas"
+                                                           th:field="*{frecuenciaHoras}" required>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="duracion">Duracion en dias</label>
+                                                    <input type="text" class="form-control" id="duracion" placeholder="Duracion"
+                                                           th:field="*{duracionDias}" required>
+                                                </div>
+                                            </div>
+                                            <!--<button type="submit" class="btn btn-accent">Modificar detalle de receta</button>-->
+                                            <input type="submit" value="Modificar detalle de receta" class="btn btn-accent"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- fin de modifica receta -->
+
+            <!-- Footer -->
+            <div th:replace="fragments/footer::footer"></div>
+        </main>
+    </div>
+</div>
+
+<!-- Info pop-up -->
+<div th:replace="fragments/info-popup::info-popup"></div>
+</body>
+</html>

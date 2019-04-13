@@ -7,12 +7,9 @@
 
    <!-- Scripts -->
    <div th:replace="fragments/scripts::scripts"></div>
-   <script>
-       function modificarReceta() { $("#modalID").modal("show"); }
-   </script>
 
-   <!-- Color switcher -->
-   <div th:replace="fragments/color-switcher::color-switcher"></div>
+   <!-- Color switcher --><!--
+   <div th:replace="fragments/color-switcher::color-switcher"></div>-->
 
    <div class="container-fluid">
       <div class="row">
@@ -33,13 +30,13 @@
                      <h3 class="page-title">Vista de Receta</h3>
 
                      <div class="input-group-append">
-                        <h5 class="page-title">Fecha</h5>
-                        <span th:text="${receta.fecha}" class="input-group-text">00/00/0000</span>
+                        <h5 class="page-title">Médico</h5>
+                        <span th:text="${receta.medico.nombre}" class="input-group-text">Egeehr Leewfrt</span>
                      </div>
 
                      <div class="input-group-append">
-                        <h5 class="page-title">Médico</h5>
-                        <span th:text="${receta.medico.nombre}" class="input-group-text">Egeehr Leewfrt</span>
+                        <h5 class="page-title">Fecha</h5>
+                        <span th:text="${receta.fecha}" class="input-group-text">00/00/0000</span>
                      </div>
                   </div>
                </div>
@@ -62,17 +59,41 @@
                                  <th scope="col" class="border-0">Frecuencia</th>
                                  <th scope="col" class="border-0">Duración</th>
                                  <th scope="col" class="border-0"></th>
+                                 <th scope="col" class="border-0"></th>
                               </tr>
                               </thead>
                               <tbody>
                               <tr th:each="detalle: ${receta.detalles}">
                                  <td th:text="${detalle.id}">1</td>
-                                 <td th:text="${detalle.presentacion.medicamento.nombre}">Lferergef 000MG</td>
-                                 <td th:text="|${detalle.dosis} ${detalle.presentacion.nombre}|">0 segetgetr</td>
-                                 <td th:text="${detalle.presentacion.viaAdministracion}">Pfwefwe</td>
-                                 <td th:text="|${detalle.intervaloHoras} horas|">0 horas</td>
+                                 <td th:text="${detalle.medicamento.nombre}">Lferergef 000MG</td>
+                                 <td th:text="|${detalle.dosis} ${detalle.medicamento.presentacion}|">0 segetgetr</td>
+                                 <td th:text="${detalle.medicamento.viaAdministracion}">Pfwefwe</td>
+                                 <td th:text="|${detalle.frecuenciaHoras} horas|">0 horas</td>
                                  <td th:text="|${detalle.duracionDias} días|">0 días</td>
-                                 <td><span onclick="modificarReceta()"><i class="material-icons" >edit</i></span></td>
+                                 <td>
+                                    <a th:href="@{/recetas/modificar-detalle(id=${detalle.id})}">
+                                       <span><i class="material-icons" >edit</i></span>
+                                    </a>
+                                 </td>
+                                 <td>
+                                    <a th:href="@{/recetas/eliminar-detalle(id=${detalle.id})}">
+                                       <span><i class="material-icons">delete</i></span>
+                                    </a>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                    <a th:href="@{/recetas/agregar-detalle(id=${receta.id})}">
+                                       <span><i class="material-icons">add</i></span>
+                                    </a>
+                                 </td>
                               </tr>
                               </tbody>
                            </table>
@@ -85,13 +106,13 @@
             <!-- End of Content -->
 
             <!-- Modal -->
-            <div class="modal fade" role="dialog" id="modalID">
+            <!--<div class="modal fade" role="dialog" id="modalID">
                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                      <div class="modal-header">
                         <h4 class="modal-title text-left">Modificar receta</h4>
                      </div>
-                     <!-- iniciapermiso -->
+                     &lt;!&ndash; iniciapermiso &ndash;&gt;
                      <div class="col-lg-8">
                         <div class="card card-small mb-4">
                            <div class="card-header border-bottom">
@@ -141,13 +162,13 @@
                            </ul>
                         </div>
                      </div>
-                     <!-- findepermiso -->
+                     &lt;!&ndash; findepermiso &ndash;&gt;
                      <div class="modal-footer">
 
                      </div>
                   </div>
                </div>
-            </div>
+            </div>-->
             <!-- finmodal -->
 
             <!-- Footer -->

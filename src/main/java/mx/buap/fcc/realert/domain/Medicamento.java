@@ -1,11 +1,11 @@
 package mx.buap.fcc.realert.domain;
 
 import lombok.Data;
-import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Carlos Montoya
@@ -18,11 +18,12 @@ public class Medicamento
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
 	private String nombre;
+	private String presentacion;
 	private String formula;
+	private String viaAdministracion;
 
-	@OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
+	/*@OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
 	@ToString.Exclude
 	private List<PresentacionMedicamento> presentaciones = new ArrayList<>();
 
@@ -30,5 +31,5 @@ public class Medicamento
 	{
 		presentaciones.add(p);
 		p.setMedicamento(this);
-	}
+	}*/
 }
