@@ -32,7 +32,7 @@ public class PacienteController
 	}
 
 	@GetMapping("/ver-expediente")
-	public String verPaciente(Model model, @RequestParam("id") int id)
+	public String verPaciente(@RequestParam("id") int id, Model model)
 	{
 		model.addAttribute("paciente",
 				pacienteRepository
@@ -41,19 +41,23 @@ public class PacienteController
 		return "ver-expediente";
 	}
 
-	@PostMapping("/modificar-paciente")
-	public String modificarPaciente(@ModelAttribute Paciente paciente)
-	{
-		log.info(paciente);
-		paciente.setPassword(passwordEncoder.encode(paciente.getPassword()));
-		pacienteRepository.save(paciente);
-		return "redirect:ver-expediente?id=" + paciente.getId();
-	}
-
 	@GetMapping("/crear-paciente")
 	public String crearPaciente(Model model)
 	{
 		model.addAttribute("paciente", new Paciente());
 		return "crear-expediente";
+	}
+
+	@PostMapping("/modificar-paciente")
+	public String guardarPaciente(@ModelAttribute Paciente paciente)
+	{
+		log.info(paciente);
+
+		String password = paciente.getPassword();
+		if (password != null)
+			paciente.setPassword(passwordEncoder.encode(password));
+
+		pacienteRepository.save(paciente);
+		return "redirect:ver-expediente?id=" + paciente.getId();
 	}
 }

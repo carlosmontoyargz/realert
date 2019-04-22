@@ -38,46 +38,4 @@ public class IndexController
 	{
 		return "login";
 	}
-
-	@GetMapping("/dashboard")
-	public String dashboard()
-	{
-		return "index";
-	}
-
-	@GetMapping("/hello")
-	public String hello()
-	{
-		return "hello";
-	}
-
-	@GetMapping("/crear-expediente")
-	public String expediente()
-	{
-		return "crear-expediente";
-	}
-
-	@GetMapping("/crear-receta")
-	public String crearReceta()
-	{
-		return "crear-receta";
-	}
-
-	@GetMapping("/modificar-receta")
-	public String modificarReceta()
-	{
-		return "modificar-receta";
-	}
-
-	@GetMapping("/ver-pacientes")
-	public String verPacientes()
-	{
-		return "ver-pacientes";
-	}
-
-	@GetMapping("/template-base")
-	public String templateBase()
-	{
-		return "template-base.html";
-	}
 }
