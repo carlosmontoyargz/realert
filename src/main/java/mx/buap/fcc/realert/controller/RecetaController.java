@@ -7,6 +7,8 @@ import mx.buap.fcc.realert.repository.DetalleRecetaRepository;
 import mx.buap.fcc.realert.repository.PersonaRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Carlos Montoya
@@ -32,24 +33,28 @@ public class RecetaController
 	private final PersonaRepository personaRepository;
 
 	@GetMapping({"", "/"})
-	public String listaRecetasPaciente(Model model, Principal principal)
+	public String listaRecetas(Model model, Authentication authentication)
 	{
-		log.info(principal.getName());
-		AtomicReference<List<Receta>> recetas = new AtomicReference<>();
-		personaRepository
-				.findByCorreo(principal.getName())
-				.ifPresent(p ->
-				{
-					Rol rol = p.getRol();
-					if (Rol.PACIENTE.equals(rol))
-						recetas.set(recetaRepository.findByPacienteCorreo(principal.getName()));
+		List<Receta> recetas;
 
-					else if (Rol.MEDICO.equals(rol))
-						recetas.set(recetaRepository.findByMedicoCorreo(principal.getName()));
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		log.info(userDetails.getUsername());
 
-					else recetas.set(Collections.emptyList());
-				});
-		model.addAttribute("recetas", recetas.get());
+		Rol rol = Rol.valueOf(userDetails
+				.getAuthorities()
+				.stream()
+				.findFirst()
+				.orElseThrow(NullPointerException::new)
+				.getAuthority());
+		if (Rol.PACIENTE.equals(rol))
+			recetas = recetaRepository.findByPacienteCorreo(userDetails.getUsername());
+
+		else if (Rol.MEDICO.equals(rol))
+			recetas = recetaRepository.findByMedicoCorreo(userDetails.getUsername());
+
+		else recetas = Collections.emptyList();
+
+		model.addAttribute("recetas", recetas);
 		return "lista-recetas";
 	}
 
@@ -86,7 +91,7 @@ public class RecetaController
 	}
 
 	@GetMapping("agregar-detalle")
-	public String agregarDetalle(Model model, @RequestParam("id") int id)
+	public String agregarDetalle(@RequestParam("id") int id, Model model)
 	{
 		Receta rc = new Receta();
 		DetalleReceta dr = new DetalleReceta();
@@ -98,7 +103,7 @@ public class RecetaController
 	}
 
 	@GetMapping("/modificar-detalle")
-	public String modificarDetalleReceta(Model model, @RequestParam("id") int id)
+	public String modificarDetalleReceta(@RequestParam("id") int id, Model model)
 	{
 		model.addAttribute("detalleReceta",
 				detalleRepository
