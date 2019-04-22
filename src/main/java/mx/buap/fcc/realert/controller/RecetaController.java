@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import mx.buap.fcc.realert.domain.DetalleReceta;
 import mx.buap.fcc.realert.domain.Receta;
 import mx.buap.fcc.realert.repository.DetalleRecetaRepository;
+import mx.buap.fcc.realert.repository.MedicamentoRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,14 +25,15 @@ import java.security.Principal;
 @Log4j2
 public class RecetaController
 {
-	private final RecetaRepository repository;
+	private final RecetaRepository recetaRepository;
 	private final DetalleRecetaRepository detalleRepository;
+	private final MedicamentoRepository medicamentoRepository;
 
 	@GetMapping({"", "/"})
 	public String listaRecetasPaciente(Model model, Principal principal)
 	{
 		model.addAttribute("recetas",
-				repository
+				recetaRepository
 						.findByPacienteCorreo(principal.getName()));
 		return "lista-recetas";
 	}
@@ -40,7 +42,7 @@ public class RecetaController
 	public String verReceta(Model model, @RequestParam("id") int id)
 	{
 		model.addAttribute("receta",
-				repository
+				recetaRepository
 						.findById(id)
 						.orElseThrow(NullPointerException::new));
 		return "ver-receta";
@@ -81,5 +83,12 @@ public class RecetaController
 	{
 		detalleRepository.deleteById(id);
 		return "redirect:" + request.getHeader("Referer");
+	}
+
+	@GetMapping("/eliminar-receta")
+	public String eliminarReceta(@RequestParam("id") int id)
+	{
+		recetaRepository.deleteById(id);
+		return "redirect:/recetas";
 	}
 }

@@ -48,7 +48,11 @@
                                  <th scope="col" class="border-0">Fecha</th>
                                  <th scope="col" class="border-0">Medico</th>
                                  <th scope="col" class="border-0"></th>
-                                 <th scope="col" class="border-0"></th>
+                                 <th scope="col" class="border-0">
+                                    <a> <!-- th:href="@{/recetas/agregar-receta(id=${paciente.id})}"-->
+                                       <span><i class="material-icons">add</i></span>
+                                    </a>
+                                 </th>
                               </tr>
                               </thead>
                               <tbody>
@@ -57,6 +61,11 @@
                                     <td th:text="${receta.fecha}">00/00/0000</td>
                                     <td th:text="${receta.medico.nombre}">Aaaaa Bbbbbb</td>
                                     <td><a th:href="@{/recetas/ver-receta(id=${receta.id})}">Ver detalles</a></td>
+                                    <td>
+                                       <a th:href="@{/recetas/eliminar-receta(id=${receta.id})}">
+                                          <span><i class="material-icons">delete</i></span>
+                                       </a>
+                                    </td>
                                  </tr>
                               </tbody>
                            </table>

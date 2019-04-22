@@ -58,7 +58,11 @@
                                  <th scope="col" class="border-0">Vía administración</th>
                                  <th scope="col" class="border-0">Frecuencia</th>
                                  <th scope="col" class="border-0">Duración</th>
-                                 <th scope="col" class="border-0"></th>
+                                 <th scope="col" class="border-0">
+                                    <a th:href="@{/recetas/agregar-detalle(id=${receta.id})}">
+                                       <span><i class="material-icons">add</i></span>
+                                    </a>
+                                 </th>
                                  <th scope="col" class="border-0"></th>
                               </tr>
                               </thead>
@@ -78,20 +82,6 @@
                                  <td>
                                     <a th:href="@{/recetas/eliminar-detalle(id=${detalle.id})}">
                                        <span><i class="material-icons">delete</i></span>
-                                    </a>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td></td>
-                                 <td></td>
-                                 <td></td>
-                                 <td></td>
-                                 <td></td>
-                                 <td></td>
-                                 <td></td>
-                                 <td>
-                                    <a th:href="@{/recetas/agregar-detalle(id=${receta.id})}">
-                                       <span><i class="material-icons">add</i></span>
                                     </a>
                                  </td>
                               </tr>
