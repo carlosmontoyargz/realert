@@ -54,7 +54,7 @@
                                     <tr th:each="paciente:${pacientes}">
                                         <td th:text="${paciente.id}">1</td>
                                         <td th:text="${paciente.nombre}">Jesús Ramirez Gonzalez</td>
-                                        <td><a th:href="@{/}">Crear receta</a></td>
+                                        <td><a th:href="@{/recetas/crear-receta(idPaciente=${paciente.id})}">Crear receta</a></td>
                                         <td>
                                             <a th:href="@{/pacientes/ver-expediente(id=${paciente.id})}">Ver expediente</a>
                                         </td>
@@ -68,9 +68,10 @@
                     </div>
                 </div>
                 <!-- End of Content -->
+            </div>
 
-                <!-- Footer -->
-                <div th:replace="fragments/footer::footer"></div>
+            <!-- Footer -->
+            <div th:replace="fragments/footer::footer"></div>
         </main>
     </div>
 </div>

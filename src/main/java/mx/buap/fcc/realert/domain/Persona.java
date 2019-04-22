@@ -19,6 +19,8 @@ public abstract class Persona
 	private int id;
 	private String nombre;
 	private String correo;
+
+	@Column(updatable = false)
 	private String password;
 	private String telefono;
 

@@ -27,7 +27,7 @@ public class IndexController
 				.orElseThrow(NullPointerException::new)
 				.getAuthority());
 
-		if (Rol.PACIENTE.equals(authority))
+		if (Rol.PACIENTE.equals(authority) || Rol.MEDICO.equals(authority))
 			return "redirect:recetas";
 
 		return "index";

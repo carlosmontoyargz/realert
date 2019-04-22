@@ -72,28 +72,46 @@
                                 <li class="list-group-item p-3">
                                     <div class="row">
                                         <div class="col">
-                                            <form>
+                                            <form th:action="@{/pacientes/modificar-paciente}"
+                                                  th:object="${paciente}"
+                                                  method="post">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" hidden>
+                                                        <label for="paciente-id"></label>
+                                                        <input type="text" class="form-control" id="paciente-id" placeholder="Nombre" value="Sierra"
+                                                               th:field="*{id}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12" hidden>
+                                                        <label for="ex-id"></label>
+                                                        <input type="text" class="form-control" id="ex-id" placeholder="Nombre" value="Sierra"
+                                                               th:field="*{expediente.id}" readonly>
+                                                    </div>
+                                                </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6">
                                                         <label for="feFirstName">Nombre</label>
                                                         <input type="text" class="form-control" id="feFirstName" placeholder="Nombre" value="Sierra"
-                                                               th:value="${paciente.nombre}">
+                                                               th:field="*{nombre}" required>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label for="feLastName">Telefono</label>
                                                         <input type="text" class="form-control" id="feLastName" placeholder="Telefono" value="22222222"
-                                                               th:value="${paciente.telefono}">
+                                                               th:field="*{telefono}" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6">
                                                         <label for="feEmailAddress">Correo electronico</label>
                                                         <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="sierra@example.com"
-                                                               th:value="${paciente.correo}">
+                                                               th:field="*{correo}" readonly>
                                                     </div>
-                                                    <div class="form-group col-md-6">
+                                                    <!--<div class="form-group col-md-6">
                                                         <label for="fePassword">Password</label>
-                                                        <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
+                                                        <input type="password" class="form-control" id="fePassword" placeholder="Password"
+                                                               th:field="*{password}" readonly>
+                                                    </div>-->
                                                 </div>
                                                 <!--<div class="form-group">
                                                     <label for="feInputAddress">Direccion</label>
@@ -118,12 +136,13 @@
                                                     <div class="form-group col-md-12">
                                                         <label for="feDescription">Descripcion</label>
                                                         <textarea class="form-control" name="feDescription" id="feDescription" rows="5"
-                                                                  th:text="${paciente.expediente.comentarios}">
+                                                                  th:field="*{expediente.comentarios}">
                                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?
                                                         </textarea>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-accent">Actualizar cuenta</button>
+
+                                                <input type="submit" value="Actualizar expediente" class="btn btn-accent"/>
                                             </form>
                                         </div>
                                     </div>

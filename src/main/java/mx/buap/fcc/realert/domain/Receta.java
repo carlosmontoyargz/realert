@@ -30,7 +30,14 @@ public class Receta
 	@ToString.Exclude
 	private List<DetalleReceta> detalles = new ArrayList<>();
 
+	@Column(updatable = false)
 	private LocalDate fecha;
+
+	@PrePersist
+	public void configurarFecha()
+	{
+		fecha = LocalDate.now();
+	}
 
 	public void agregarDetalle(DetalleReceta d)
 	{

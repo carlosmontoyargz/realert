@@ -2,13 +2,12 @@ package mx.buap.fcc.realert.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import mx.buap.fcc.realert.domain.Paciente;
 import mx.buap.fcc.realert.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Carlos Montoya
@@ -35,7 +34,15 @@ public class PacienteController
 		model.addAttribute("paciente",
 				pacienteRepository
 						.findById(id)
-						.orElseThrow(NullPointerException::new));
+						.orElse(null));
 		return "ver-expediente";
+	}
+
+	@PostMapping("/modificar-paciente")
+	public String guardarDetalle(@ModelAttribute Paciente paciente)
+	{
+		log.info(paciente);
+		pacienteRepository.save(paciente);
+		return "redirect:ver-expediente?id=" + paciente.getId();
 	}
 }

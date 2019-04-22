@@ -14,4 +14,6 @@ import java.util.List;
 public interface RecetaRepository extends CrudRepository<Receta, Integer>
 {
 	List<Receta> findByPacienteCorreo(String correo);
+
+	List<Receta> findByMedicoCorreo(String correo);
 }
