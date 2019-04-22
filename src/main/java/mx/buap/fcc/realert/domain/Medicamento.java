@@ -2,7 +2,10 @@ package mx.buap.fcc.realert.domain;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Carlos Montoya
@@ -16,9 +19,9 @@ public class Medicamento
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	/*@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "detalle_receta_id", referencedColumnName = "id")
-	private DetalleReceta detalleReceta;
+	private DetalleReceta detalleReceta;*/
 
 	private String nombre;
 	private String presentacion;

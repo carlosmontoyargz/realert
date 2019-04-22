@@ -19,7 +19,7 @@ public class DetalleReceta
 	@ManyToOne
 	private Receta receta;
 
-	@OneToOne(mappedBy = "detalleReceta", cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Medicamento medicamento;
 
 	private int dosis;

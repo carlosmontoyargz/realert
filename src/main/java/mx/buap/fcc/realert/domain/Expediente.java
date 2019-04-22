@@ -19,5 +19,5 @@ public class Expediente
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	private String contenido;
+	private String comentarios;
 }

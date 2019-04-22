@@ -1,3 +1,13 @@
+GET http://localhost:8080/pacientes
+
+###
+
+GET http://localhost:8080/pacientes
+
+<> 2019-04-21T084831.200.html
+
+###
+
 GET http://localhost:8080/recetas/lista-recetas-paciente/receta
 
 ###

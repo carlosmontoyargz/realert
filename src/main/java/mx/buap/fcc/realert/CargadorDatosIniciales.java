@@ -56,13 +56,12 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		personaRepository.save(medico2);
 
 		Paciente paciente = new Paciente();
-		Expediente e = new Expediente();
 		paciente.setNombre("Usula Iguaran");
-		paciente.setComentarios("Ha gozado de longevidad");
 		paciente.setCorreo("ursula.iguaran@gmail.com");
 		paciente.setPassword(passwordEncoder.encode("noporolo"));
 		paciente.setTelefono("3344333436");
-		e.setContenido("Primera visita: Todos los indicadores parecen estar en orden");
+		Expediente e = new Expediente();
+		e.setComentarios("Primera visita: Todos los indicadores parecen estar en orden");
 		paciente.setExpediente(e);
 		personaRepository.save(paciente);
 
@@ -106,7 +105,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		dr.setDosis(4);
 		dr.setFrecuenciaHoras(3);
 		dr.setDuracionDias(5);
-		dr.setMensaje("Una tableta cada 3 horas");
+		dr.setMensaje("Una tableta cada 3 horas");;
 		r.agregarDetalle(dr);
 		recetaRepository.save(r);
 

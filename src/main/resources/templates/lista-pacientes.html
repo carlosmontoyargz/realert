@@ -29,7 +29,7 @@
                 <div class="page-header row no-gutters py-4">
                     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
                         <span class="text-uppercase page-subtitle"></span>
-                        <h3 class="page-title">Mis pacientes</h3>
+                        <h3 class="page-title">Lista de pacientes</h3>
                     </div>
                 </div>
 
@@ -54,8 +54,10 @@
                                     <tr th:each="paciente:${pacientes}">
                                         <td th:text="${paciente.id}">1</td>
                                         <td th:text="${paciente.nombre}">Jesús Ramirez Gonzalez</td>
-                                        <td><a href="#">Crear receta</a></td>
-                                        <td><a href="#">Modificar expediente<a></td>
+                                        <td><a th:href="@{/}">Crear receta</a></td>
+                                        <td>
+                                            <a th:href="@{/pacientes/ver-expediente(id=${paciente.id})}">Ver expediente</a>
+                                        </td>
                                         <!--<td><a href="#"></a>Crear expediente</td>-->
                                         <!--<td><a href="#">Modificar recetas</a></td>-->
                                     </tr>

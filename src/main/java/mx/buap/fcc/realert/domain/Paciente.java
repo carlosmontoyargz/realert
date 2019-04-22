@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
+import java.time.LocalDate;
 
 /**
  * @author Carlos Montoya
@@ -19,10 +20,10 @@ import javax.persistence.PrePersist;
 @EqualsAndHashCode(callSuper = true)
 public class Paciente extends Persona
 {
+	private LocalDate fechaNacimiento;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Expediente expediente;
-
-	private String comentarios;
 
 	@PrePersist
 	public void setRol()

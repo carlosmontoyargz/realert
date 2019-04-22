@@ -3,6 +3,7 @@ package mx.buap.fcc.realert.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * @author Carlos Montoya
@@ -21,9 +22,18 @@ public abstract class Persona
 	private String password;
 	private String telefono;
 
+	@Column(updatable = false)
+	private LocalDate registro;
+
 	@Enumerated(EnumType.STRING)
 	@Column(updatable = false)
 	private Rol rol;
+
+	@PrePersist
+	public void setFechaRegistro()
+	{
+		registro = LocalDate.now();
+	}
 
 	/*@ManyToOne(cascade = CascadeType.ALL)
 	private Rol rol;*/
