@@ -5,9 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import mx.buap.fcc.realert.domain.Paciente;
 import mx.buap.fcc.realert.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * @author Carlos Montoya
@@ -20,8 +22,9 @@ import org.springframework.web.bind.annotation.*;
 public class PacienteController
 {
 	private final PacienteRepository pacienteRepository;
+	private final PasswordEncoder passwordEncoder;
 
-	@GetMapping({"", "/"})
+	@GetMapping("")
 	private String listarPacientes(Model model)
 	{
 		model.addAttribute("pacientes", pacienteRepository.findAll());
@@ -29,7 +32,7 @@ public class PacienteController
 	}
 
 	@GetMapping("/ver-expediente")
-	public String modificarPaciente(Model model, @RequestParam("id") int id)
+	public String verPaciente(Model model, @RequestParam("id") int id)
 	{
 		model.addAttribute("paciente",
 				pacienteRepository
@@ -39,10 +42,18 @@ public class PacienteController
 	}
 
 	@PostMapping("/modificar-paciente")
-	public String guardarDetalle(@ModelAttribute Paciente paciente)
+	public String modificarPaciente(@ModelAttribute Paciente paciente)
 	{
 		log.info(paciente);
+		paciente.setPassword(passwordEncoder.encode(paciente.getPassword()));
 		pacienteRepository.save(paciente);
 		return "redirect:ver-expediente?id=" + paciente.getId();
+	}
+
+	@GetMapping("/crear-paciente")
+	public String crearPaciente(Model model)
+	{
+		model.addAttribute("paciente", new Paciente());
+		return "crear-expediente";
 	}
 }
