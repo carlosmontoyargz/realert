@@ -21,7 +21,7 @@ public class PacienteController
 {
 	private final PacienteRepository pacienteRepository;
 
-	@GetMapping("/pacientes")
+	@GetMapping({"", "/"})
 	private String listarPacientes(Model model)
 	{
 		model.addAttribute("pacientes", pacienteRepository.findAll());

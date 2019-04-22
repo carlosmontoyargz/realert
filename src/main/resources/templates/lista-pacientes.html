@@ -48,18 +48,16 @@
                                         <th scope="col" class="border-0">Nombre</th>
                                         <th scope="col" class="border-0"></th>
                                         <th scope="col" class="border-0"></th>
-                                        <th scope="col" class="border-0"></th>
-                                        <th scope="col" class="border-0"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Jesús Ramirez Gonzalez</td>
-                                        <td><a href="#">Crear expediente<a></td>
-                                        <td><a href="#">Modificar expediente</a></td>
+                                    <tr th:each="paciente:${pacientes}">
+                                        <td th:text="${paciente.id}">1</td>
+                                        <td th:text="${paciente.nombre}">Jesús Ramirez Gonzalez</td>
                                         <td><a href="#">Crear receta</a></td>
-                                        <td><a href="#">Modificar recetas</a></td>
+                                        <td><a href="#">Modificar expediente<a></td>
+                                        <!--<td><a href="#"></a>Crear expediente</td>-->
+                                        <!--<td><a href="#">Modificar recetas</a></td>-->
                                     </tr>
                                     </tbody>
                                 </table>

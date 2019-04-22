@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import mx.buap.fcc.realert.domain.DetalleReceta;
 import mx.buap.fcc.realert.domain.Receta;
 import mx.buap.fcc.realert.repository.DetalleRecetaRepository;
-import mx.buap.fcc.realert.repository.MedicamentoRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ public class RecetaController
 {
 	private final RecetaRepository recetaRepository;
 	private final DetalleRecetaRepository detalleRepository;
-	private final MedicamentoRepository medicamentoRepository;
 
 	@GetMapping({"", "/"})
 	public String listaRecetasPaciente(Model model, Principal principal)
