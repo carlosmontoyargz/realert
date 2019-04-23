@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="no-js h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:include="fragments/header::header">
    <title id="pageTitle">Mis recetas</title>
 </head>
@@ -48,7 +50,10 @@
                                  <th scope="col" class="border-0">Nombre</th>
                                  <th scope="col" class="border-0">Cedula</th>
                                  <th scope="col" class="border-0">
-                                    <a th:href="@{/medicos/crear-medico}">Crear medico</a>
+                                    <a th:href="@{/medicos/crear-medico}"
+                                       sec:authorize="hasAuthority('ADMINISTRADOR')">
+                                       Crear medico
+                                    </a>
                                  </th>
                               </tr>
                               </thead>
@@ -58,7 +63,10 @@
                                  <td th:text="${medico.nombre}">Jesús Ramirez Gonzalez</td>
                                  <td th:text="${medico.cedula}">10007000</td>
                                  <td>
-                                    <a th:href="@{/medicos/ver(id=${medico.id})}">Ver informacion</a>
+                                    <a th:href="@{/medicos/ver(id=${medico.id})}"
+                                       sec:authorize="hasAnyAuthority('MEDICO','ADMINISTRADOR')">
+                                       Ver informacion
+                                    </a>
                                  </td>
                                  <!--<td><a href="#"></a>Crear expediente</td>-->
                                  <!--<td><a href="#">Modificar recetas</a></td>-->

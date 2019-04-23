@@ -41,16 +41,21 @@ public class RecetaController
 		log.info(userDetails.getUsername());
 
 		Rol rol = Rol.valueOf(userDetails
-				.getAuthorities()
-				.stream()
-				.findFirst()
-				.orElseThrow(NullPointerException::new)
+				.getAuthorities().stream()
+				.findFirst().orElseThrow(NullPointerException::new)
 				.getAuthority());
+
 		if (Rol.PACIENTE.equals(rol))
-			recetas = recetaRepository.findByPacienteCorreo(userDetails.getUsername());
+			recetas = recetaRepository
+					.findByPacienteCorreo(userDetails.getUsername());
 
 		else if (Rol.MEDICO.equals(rol))
-			recetas = recetaRepository.findByMedicoCorreo(userDetails.getUsername());
+			recetas = recetaRepository
+					.findByMedicoCorreo(userDetails.getUsername());
+
+		else if (Rol.ADMINISTRADOR.equals(rol))
+			recetas = recetaRepository
+					.findAll();
 
 		else recetas = Collections.emptyList();
 

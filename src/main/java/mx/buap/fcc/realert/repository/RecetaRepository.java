@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface RecetaRepository extends CrudRepository<Receta, Integer>
 {
+	List<Receta> findAll();
+
 	List<Receta> findByPacienteCorreo(String correo);
 
 	List<Receta> findByMedicoCorreo(String correo);

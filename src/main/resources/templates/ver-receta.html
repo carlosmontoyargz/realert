@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="no-js h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:include="fragments/header::header">
    <title id="pageTitle">Mis recetas</title>
 </head>
@@ -59,7 +61,8 @@
                                  <th scope="col" class="border-0">Frecuencia</th>
                                  <th scope="col" class="border-0">Duración</th>
                                  <th scope="col" class="border-0">
-                                    <a th:href="@{/recetas/agregar-detalle(id=${receta.id})}">
+                                    <a th:href="@{/recetas/agregar-detalle(id=${receta.id})}"
+                                       sec:authorize="hasAuthority('MEDICO')">
                                        <span><i class="material-icons">add</i></span>
                                     </a>
                                  </th>
@@ -75,12 +78,14 @@
                                  <td th:text="|${detalle.frecuenciaHoras} horas|">0 horas</td>
                                  <td th:text="|${detalle.duracionDias} días|">0 días</td>
                                  <td>
-                                    <a th:href="@{/recetas/modificar-detalle(id=${detalle.id})}">
+                                    <a th:href="@{/recetas/modificar-detalle(id=${detalle.id})}"
+                                       sec:authorize="hasAuthority('MEDICO')">
                                        <span><i class="material-icons" >edit</i></span>
                                     </a>
                                  </td>
                                  <td>
-                                    <a th:href="@{/recetas/eliminar-detalle(id=${detalle.id})}">
+                                    <a th:href="@{/recetas/eliminar-detalle(id=${detalle.id})}"
+                                       sec:authorize="hasAnyAuthority('MEDICO','ADMINISTRADOR')">
                                        <span><i class="material-icons">delete</i></span>
                                     </a>
                                  </td>

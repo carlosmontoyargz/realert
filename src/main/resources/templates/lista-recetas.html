@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="no-js h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:include="fragments/header::header">
    <title id="pageTitle">Mis recetas</title>
 </head>
@@ -50,7 +52,7 @@
                                  <th scope="col" class="border-0">Paciente</th>
                                  <th scope="col" class="border-0"></th>
                                  <th scope="col" class="border-0">
-                                    <a th:href="@{/pacientes}">
+                                    <a th:href="@{/pacientes}" sec:authorize="hasAuthority('MEDICO')">
                                        <span><i class="material-icons">add</i></span>
                                     </a>
                                  </th>
@@ -64,7 +66,8 @@
                                     <td th:text="${receta.paciente.nombre}">Ccccccc Dddddddd</td>
                                     <td><a th:href="@{/recetas/ver-receta(id=${receta.id})}">Ver detalles</a></td>
                                     <td>
-                                       <a th:href="@{/recetas/eliminar-receta(id=${receta.id})}">
+                                       <a th:href="@{/recetas/eliminar-receta(id=${receta.id})}"
+                                          sec:authorize="hasAnyAuthority('MEDICO','ADMINISTRADOR')">
                                           <span><i class="material-icons">delete</i></span>
                                        </a>
                                     </td>

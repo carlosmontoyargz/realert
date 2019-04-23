@@ -1,6 +1,7 @@
 package mx.buap.fcc.realert.controller;
 
 import lombok.RequiredArgsConstructor;
+import mx.buap.fcc.realert.domain.Administrador;
 import mx.buap.fcc.realert.domain.Medico;
 import mx.buap.fcc.realert.domain.Paciente;
 import mx.buap.fcc.realert.repository.PersonaRepository;
@@ -41,6 +42,11 @@ public class ProfileController
 					{
 						model.addAttribute("paciente", p);
 						view.set("ver-expediente");
+					}
+					else if (p instanceof Administrador)
+					{
+						model.addAttribute("administrador", p);
+						view.set("ver-administrador");
 					}
 				});
 		return view.get();

@@ -68,7 +68,7 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		Administrador administrador = new Administrador();
 		administrador.setNombre("Jose Arcadio");
 		administrador.setCorreo("jose.arcadio@outlook.com");
-		administrador.setClave("CLAVE");
+		administrador.setClave("ACM1PT");
 		administrador.setPassword(passwordEncoder.encode("trololo"));
 		administrador.setTelefono("9988334116");
 		personaRepository.save(administrador);

@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="no-js h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:include="fragments/header::header">
     <title id="pageTitle">Mis recetas</title>
 </head>
@@ -47,7 +49,10 @@
                                         <th scope="col" class="border-0">#</th>
                                         <th scope="col" class="border-0">Nombre</th>
                                         <th scope="col" class="border-0">
-                                            <a th:href="@{/pacientes/crear-paciente}">Crear paciente</a>
+                                            <a th:href="@{/pacientes/crear-paciente}"
+                                               sec:authorize="hasAuthority('ADMINISTRADOR')">
+                                                Crear paciente
+                                            </a>
                                         </th>
                                         <th scope="col" class="border-0"></th>
                                     </tr>
@@ -56,9 +61,17 @@
                                     <tr th:each="paciente:${pacientes}">
                                         <td th:text="${paciente.id}">1</td>
                                         <td th:text="${paciente.nombre}">Jesús Ramirez Gonzalez</td>
-                                        <td><a th:href="@{/recetas/crear-receta(idPaciente=${paciente.id})}">Crear receta</a></td>
                                         <td>
-                                            <a th:href="@{/pacientes/ver-expediente(id=${paciente.id})}">Ver expediente</a>
+                                            <a th:href="@{/pacientes/ver-expediente(id=${paciente.id})}"
+                                               sec:authorize="hasAnyAuthority('ADMINISTRADOR','MEDICO')">
+                                                Ver expediente
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a th:href="@{/recetas/crear-receta(idPaciente=${paciente.id})}"
+                                               sec:authorize="hasAuthority('MEDICO')">
+                                                Crear receta
+                                            </a>
                                         </td>
                                         <!--<td><a href="#"></a>Crear expediente</td>-->
                                         <!--<td><a href="#">Modificar recetas</a></td>-->

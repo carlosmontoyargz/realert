@@ -30,6 +30,9 @@ public class IndexController
 		if (Rol.PACIENTE.equals(authority) || Rol.MEDICO.equals(authority))
 			return "redirect:recetas";
 
+		else if (Rol.ADMINISTRADOR.equals(authority))
+			return "redirect:profile";
+
 		return "index";
 	}
 
