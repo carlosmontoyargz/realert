@@ -47,7 +47,7 @@
                      <span>Pacientes</span>
                   </a>
                </li>
-               <li class="nav-item" sec:authorize="hasAuthority('ADMINISTRADOR')">
+               <li class="nav-item" sec:authorize="hasAnyAuthority('MEDICO','ADMINISTRADOR')">
                   <a class="nav-link " th:href="@{/medicos}">
                      <i class="material-icons">view_module</i>
                      <span>Medicos</span>

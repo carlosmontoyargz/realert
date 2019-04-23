@@ -1,7 +1,6 @@
 package mx.buap.fcc.realert.config;
 
 import lombok.RequiredArgsConstructor;
-import mx.buap.fcc.realert.domain.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import static mx.buap.fcc.realert.domain.Rol.ADMINISTRADOR;
+import static mx.buap.fcc.realert.domain.Rol.MEDICO;
 
 /**
  * @author Carlos Montoya
@@ -34,10 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.authorizeRequests()
 						.antMatchers("/css/**", "/fonts/**", "/css/**", "/images/**", "/js/**", "/scripts/**", "/styles/**", "/vendor/**")
 								.permitAll()
-						.antMatchers("/recetas/lista-recetas-paciente")
-								.hasAnyAuthority(Rol.PACIENTE.toString())
-						.antMatchers("/add-new-post")
-								.hasAnyAuthority(Rol.ADMINISTRADOR.toString())
+						.antMatchers("/recetas/crear-receta", "/recetas/agregar-detalle", "/recetas/modificar-detalle", "/recetas/eliminar-detalle")
+								.hasAuthority(MEDICO.toString())
+						.antMatchers("/medicos/**", "/pacientes/**")
+								.hasAnyAuthority(MEDICO.toString(), ADMINISTRADOR.toString())
 						.anyRequest()
 								.authenticated()
 				.and()
