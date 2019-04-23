@@ -56,8 +56,8 @@ public class CargadorDatosIniciales implements CommandLineRunner
 		personaRepository.save(medico2);
 
 		Paciente paciente = new Paciente();
-		paciente.setNombre("Usula Iguaran");
-		paciente.setCorreo("ursula.iguaran@gmail.com");
+		paciente.setNombre("Carlos Montoya");
+		paciente.setCorreo("carlos.montoya.rdgz@gmail.com");
 		paciente.setPassword(passwordEncoder.encode("noporolo"));
 		paciente.setTelefono("3344333436");
 		Expediente e = new Expediente();

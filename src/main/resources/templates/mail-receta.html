@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+   <div>
+        <span class="im">
+            <h3 style="font-family:sans-serif,Verdana,Arial;font-size:12px">Hola! Esta es tu receta, espero que te mejores pronto!</h3>
+        </span>
+
+      <table border="1" style="font-family:sans-serif,Verdana,Arial;font-size:12px;border-collapse:collapse;border:1px solid #e4e4e4">
+         <tbody>
+         <tr>
+            <th width="100" bgcolor="#D8D8D8" align="left">Medico: </th>
+            <td width="680" align="left" th:text="${receta.medico.nombre}">0000000000</td>
+         </tr>
+         <tr>
+            <th width="100" bgcolor="#D8D8D8" align="left">Paciente: </th>
+            <td width="300" align="left" th:text="${receta.paciente.nombre}">00-00-0000</td>
+         </tr>
+         <tr>
+            <th width="100" bgcolor="#D8D8D8" align="left">Fecha: </th>
+            <td width="300" align="left" th:text="${receta.fecha}">00-00-0000</td>
+         </tr>
+         </tbody>
+      </table>
+      <br>
+
+      <table border="1" style="font-family:sans-serif,Verdana,Arial;font-size:12px;border-collapse:collapse;border:1px solid #e4e4e4">
+         <thead class="bg-light">
+         <tr>
+            <th width="70" bgcolor="#D8D8D8" align="left">Medicamento</th>
+            <th width="70" bgcolor="#D8D8D8" align="left">Dosis</th>
+            <th width="70" bgcolor="#D8D8D8" align="left">Vía administración</th>
+            <th width="70" bgcolor="#D8D8D8" align="left">Frecuencia</th>
+            <th width="70" bgcolor="#D8D8D8" align="left">Duración</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr th:each="detalle:${receta.detalles}">
+            <td th:text="${detalle.medicamento.nombre}">Lferergef 000MG</td>
+            <td th:text="|${detalle.dosis} ${detalle.medicamento.presentacion}|">0 segetgetr</td>
+            <td th:text="${detalle.medicamento.viaAdministracion}">Pfwefwe</td>
+            <td th:text="|${detalle.frecuenciaHoras} horas|">0 horas</td>
+            <td th:text="|${detalle.duracionDias} días|">0 días</td>
+         </tr>
+         </tbody>
+      </table>
+      <!--<table border="1" style="font-family:sans-serif,Verdana,Arial;font-size:12px;border-collapse:collapse;border:1px solid #e4e4e4">
+         <tbody>
+         <tr>
+            <th width="70" bgcolor="#D8D8D8" align="left">Cantidad</th>
+            <th width="90" bgcolor="#D8D8D8" align="left">Unidad</th>
+            <th width="90" bgcolor="#D8D8D8" align="left">Clave</th>
+            <th width="350" bgcolor="#D8D8D8" align="left">Descripción</th>
+            <th width="90" bgcolor="#D8D8D8" align="left">Precio U.</th>
+            <th width="90" bgcolor="#D8D8D8" align="left">Importe</th>
+         </tr>
+
+         <tr th:each="detalle : ${venta.detalles}">
+            <td th:text="${detalle.cantidad}">00.00</td>
+            <td th:text="${detalle.unidadMedida}">UM</td>
+            <td th:text="${detalle.claveArticulo}">CLAVE</td>
+            <td th:text="${detalle.descripcion}">DESCRIPCION</td>
+            <td th:text="${detalle.precioUnitario}">PRECIO_U</td>
+            <td th:text="${detalle.importe}">IMPORTE</td>
+         </tr>
+         </tbody>
+      </table>-->
+   </div>
+</body>
+</html>

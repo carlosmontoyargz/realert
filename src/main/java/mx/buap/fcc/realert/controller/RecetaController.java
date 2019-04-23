@@ -6,6 +6,7 @@ import mx.buap.fcc.realert.domain.*;
 import mx.buap.fcc.realert.repository.DetalleRecetaRepository;
 import mx.buap.fcc.realert.repository.PersonaRepository;
 import mx.buap.fcc.realert.repository.RecetaRepository;
+import mx.buap.fcc.realert.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +32,7 @@ public class RecetaController
 	private final RecetaRepository recetaRepository;
 	private final DetalleRecetaRepository detalleRepository;
 	private final PersonaRepository personaRepository;
+	private final EmailService emailService;
 
 	@GetMapping({"", "/"})
 	public String listaRecetas(Model model, Authentication authentication)
@@ -137,5 +139,15 @@ public class RecetaController
 	{
 		recetaRepository.deleteById(id);
 		return "redirect:/recetas";
+	}
+
+	@GetMapping("/enviar-alerta")
+	public String enviarCorreoAlerta(@RequestParam("id") int id)
+	{
+		recetaRepository
+				.findById(id)
+				.ifPresent(emailService::enviarCorreoVenta);
+
+		return "redirect:ver-receta?id=" + id;
 	}
 }
